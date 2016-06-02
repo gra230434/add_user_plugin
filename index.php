@@ -102,32 +102,32 @@ function defuser_user() {
 
 	$wpdb->insert(
 		$table_name, 	array(
-						'user_name'   => $def_name,
-						'user_pass'   => $def_pass,
-						'Date_Created' => current_time( 'mysql' ),
-						) );
+			'user_name'   => $def_name,
+			'user_pass'   => $def_pass,
+			'Date_Created' => current_time( 'mysql' ),
+		));
 
 	$user_logindata = $wpdp->get_row("SELECT * FROM $user_table_name WHERE user_name= $def_name", ARRAY_A);
 	$user_number = $user_logindata['user_id'];
 
 	$def_fname   = 'Kevin';
-  $def_lname   = 'Wei';
-  $def_email   = 'gra230434@gmail.com';
-  $user_gra    = '104';
-  $def_summary = '';
-  $def_url     = '';
+	$def_lname   = 'Wei';
+	$def_email   = 'gra230434@gmail.com';
+	$user_gra    = '104';
+	$def_summary = '';
+	$def_url     = '';
 
   $wpdb->insert(
 		$table_name, 	array(
-      			'user_id'      => $user_number,
-						'user_name'    => $def_name,
-						'user_fname'   => $def_fname,
-						'user_lname'   => $def_lname,
-						'user_email'   => $def_email,
-						'user_gra'     => $user_gra,
-						'user_summary' => $def_summary,
-						'user_url'     => $def_url,
-      			));
+    	'user_id'      => $user_number,
+			'user_name'    => $def_name,
+			'user_fname'   => $def_fname,
+			'user_lname'   => $def_lname,
+			'user_email'   => $def_email,
+			'user_gra'     => $user_gra,
+			'user_summary' => $def_summary,
+			'user_url'     => $def_url,
+		));
 }
 
 register_activation_hook( __FILE__, 'user_table' );
