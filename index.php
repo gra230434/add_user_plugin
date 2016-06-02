@@ -119,7 +119,7 @@ function defuser_user() {
 
   $wpdb->insert(
 		$table_name, 	array(
-    	'user_id'      => $user_number,
+			'user_id'      => $user_number,
 			'user_name'    => $def_name,
 			'user_fname'   => $def_fname,
 			'user_lname'   => $def_lname,
