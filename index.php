@@ -42,11 +42,11 @@ function user_table() {
 		UNIQUE KEY id (user_id)
 	) $charset_collate;";
 
-    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	  dbDelta( $sql );
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
 
-	  add_option( 'kevin_db_version', $kevin_db_version );
-  }
+	add_option( 'kevin_db_version', $kevin_db_version );
+}
 
   // create new ta
   function user_data_table() {
@@ -73,65 +73,63 @@ function user_table() {
    * user_url 這人網站 default:''
    *
    */
-  	  $sql = "CREATE TABLE $table_name (
-        user_id MEDIUMINT(9) NOT NULL,
-        user_name VARCHAR(30) NOT NULL,
-  		  user_ftname VARCHAR(30) NOT NULL,
-        user_ltname VARCHAR(30) NOT NULL,
-        user_email VARCHAR(50) NOT NULL,
-        user_gra INT(4) NOT NULL,
-        user_summary TINYTEXT DEFAULT '' NOT NULL,
-  		  user_url VARCHAR(55) NULL,
-  		  UNIQUE KEY id (user_id)
-      ) $charset_collate;";
+	 $sql = "CREATE TABLE $table_name (
+		 user_id MEDIUMINT(9) NOT NULL,
+		 user_name VARCHAR(30) NOT NULL,
+		 user_ftname VARCHAR(30) NOT NULL,
+		 user_ltname VARCHAR(30) NOT NULL,
+		 user_email VARCHAR(50) NOT NULL,
+		 user_gra INT(4) NOT NULL,
+		 user_summary TINYTEXT DEFAULT '' NOT NULL,
+		 user_url VARCHAR(55) NULL,
+		 UNIQUE KEY id (user_id)
+	 ) $charset_collate;";
 
-      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-  	  dbDelta( $sql );
+	 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	 dbDelta( $sql );
 
-  	  add_option( 'kevin_db_version', $kevin_db_version );
-    }
+	 add_option( 'kevin_db_version', $kevin_db_version );
+}
 
-  function defuser_user() {
-	  global $wpdb;
+function defuser_user() {
+	global $wpdb;
 
-	  $def_name = 'kevin';
-	  $def_pass = md5('000000');
+	$def_name = 'kevin';
+	$def_pass = md5('000000');
 
-    $user_table_name = $wpdb->prefix . 'alumni';
-    $data_table_name = $wpdb->prefix . 'alumni_data';
+	$user_table_name = $wpdb->prefix . 'alumni';
+	$data_table_name = $wpdb->prefix . 'alumni_data';
 
-	  $wpdb->insert(
-		  $table_name, 	array(
-			'user_name'   => $def_name,
-			'user_pass'   => $def_pass,
-      'Date_Created' => current_time( 'mysql' ),
-      )
-	  );
+	$wpdb->insert(
+		$table_name, 	array(
+						'user_name'   => $def_name,
+						'user_pass'   => $def_pass,
+						'Date_Created' => current_time( 'mysql' ),
+						) );
 
-    $user_logindata = $wpdp->get_row("SELECT * FROM $user_table_name WHERE user_name= $def_name", ARRAY_A);
-    $user_number = $user_logindata['user_id'];
+	$user_logindata = $wpdp->get_row("SELECT * FROM $user_table_name WHERE user_name= $def_name", ARRAY_A);
+	$user_number = $user_logindata['user_id'];
 
-    $def_fname   = 'Kevin';
-    $def_lname   = 'Wei';
-    $def_email   = 'gra230434@gmail.com';
-    $user_gra    = '104';
-    $def_summary = '';
-    $def_url     = '';
+	$def_fname   = 'Kevin';
+  $def_lname   = 'Wei';
+  $def_email   = 'gra230434@gmail.com';
+  $user_gra    = '104';
+  $def_summary = '';
+  $def_url     = '';
 
-    $wpdb->insert(
-		  $table_name, 	array(
-      'user_id'      => $user_number,
-			'user_name'    => $def_name,
-			'user_fname'   => $def_fname,
-      'user_lname'   => $def_lname,
-      'user_email'   => $def_email,
-      'user_gra'     => $user_gra,
-      'user_summary' => $def_summary,
-      'user_url'     => $def_url,
-      )
-	  );
-  }
+  $wpdb->insert(
+		$table_name, 	array(
+      			'user_id'      => $user_number,
+						'user_name'    => $def_name,
+						'user_fname'   => $def_fname,
+						'user_lname'   => $def_lname,
+						'user_email'   => $def_email,
+						'user_gra'     => $user_gra,
+						'user_summary' => $def_summary,
+						'user_url'     => $def_url,
+      			));
+}
 
-  register_activation_hook( __FILE__, 'user_table' );
-  register_activation_hook( __FILE__, 'defuser_user' );
+register_activation_hook( __FILE__, 'user_table' );
+register_activation_hook( __FILE__, 'defuser_user' );
   //register_activation_hook( __FILE__, 'defuser_install_data' );
