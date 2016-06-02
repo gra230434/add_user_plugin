@@ -34,13 +34,13 @@ function user_table() {
  * Date_Created 帳號創建時間
  *
  */
-	  $sql = "CREATE TABLE $table_name (
-      user_id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
-      user_name CHAR(32) NOT NULL,
-      user_pass CHAR(32) NOT NULL,
-      Date_Created datetime DEFAULT '0000-00-00 00:00:00' NULL,
-		  UNIQUE KEY id (user_id)
-    ) $charset_collate;";
+	$sql = "CREATE TABLE $table_name (
+		user_id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+		user_name CHAR(32) NOT NULL,
+		user_pass CHAR(32) NOT NULL,
+		Date_Created datetime DEFAULT '0000-00-00 00:00:00' NULL,
+		UNIQUE KEY id (user_id)
+	) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	  dbDelta( $sql );
